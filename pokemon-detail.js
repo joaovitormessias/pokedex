@@ -1,5 +1,6 @@
 let currentPokemonId = null;
 
+//Displays pokemon according to id
 document.addEventListener("DOMContentLoaded", () => {
   const MAX_POKEMONS = 151;
   const pokemonID = new URLSearchParams(window.location.search).get("id");
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadPokemon(id);
 });
 
+//Load the data pokemon
 async function loadPokemon(id) {
   try {
     const [pokemon, pokemonSpecies] = await Promise.all([
@@ -62,6 +64,7 @@ async function loadPokemon(id) {
   }
 }
 
+//Nav between pokemons
 async function navigatePokemon(id) {
   currentPokemonId = id;
   await loadPokemon(id);
@@ -88,12 +91,14 @@ const typeColors = {
   dark: "#EE99AC",
 };
 
+//Set elements and modify visual
 function setElementStyles(elements, cssProperty, value) {
   elements.forEach((element) => {
     element.style[cssProperty] = value;
   });
 }
 
+//Modifying rgba hexadecimal
 function rgbaFromHex(hexColor) {
   return [
     parseInt(hexColor.slice(1, 3), 16),
@@ -102,6 +107,7 @@ function rgbaFromHex(hexColor) {
   ].join(", ");
 }
 
+//Set Background
 function setTypeBackgroundColor(pokemon) {
   const mainType = pokemon.types[0].type.name;
   const color = typeColors[mainType];
@@ -146,6 +152,7 @@ function setTypeBackgroundColor(pokemon) {
   document.head.appendChild(styleTag);
 }
 
+//Formating 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
@@ -159,6 +166,7 @@ function createAndAppendElement(parent, tag, options = {}) {
   return element;
 }
 
+//Display details of the pokemon
 function displayPokemonDetails(pokemon) {
   const { name, id, types, weight, height, abilities, stats } = pokemon;
   const capitalizePokemonName = capitalizeFirstLetter(name);
@@ -242,6 +250,7 @@ function displayPokemonDetails(pokemon) {
   setTypeBackgroundColor(pokemon);
 }
 
+//Return english text
 function getEnglishFlavorText(pokemonSpecies) {
   for (let entry of pokemonSpecies.flavor_text_entries) {
     if (entry.language.name === "en") {
