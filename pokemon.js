@@ -7,6 +7,7 @@ const notFoundMessage = document.querySelector("#not-found-message");
 
 let allPokemons = [];
 
+//Search all pokemons in API
 fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
   .then((response) => response.json())
   .then((data) => {
@@ -14,6 +15,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
     displayPokemons(allPokemons);
   });
 
+//Loading data
 async function fetchPokemonDataBeforeRedirect(id) {
   try {
     const [pokemon, pokemonSpecies] = await Promise.all([
@@ -30,6 +32,7 @@ async function fetchPokemonDataBeforeRedirect(id) {
   }
 }
 
+//Display Pokemons
 function displayPokemons(pokemon) {
   listWrapper.innerHTML = "";
 
@@ -62,6 +65,7 @@ function displayPokemons(pokemon) {
 
 searchInput.addEventListener("keyup", handleSearch);
 
+//Apply a treatment
 function handleSearch() {
   const searchTerm = searchInput.value.toLowerCase();
   let filteredPokemons;
@@ -91,6 +95,7 @@ function handleSearch() {
 const closeButton = document.querySelector(".search-close-icon");
 closeButton.addEventListener("click", clearSearch);
 
+//Clear search
 function clearSearch() {
   searchInput.value = "";
   displayPokemons(allPokemons);
