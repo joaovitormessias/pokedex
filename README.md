@@ -6,7 +6,7 @@ Bem-vindo à **Pokédex**, um projeto desenvolvido utilizando **HTML, CSS e Java
 
 ## 🌟 Demonstração
 
-[Captura de tela 2025-02-21 175411](https://github.com/user-attachments/assets/37cab9d5-79ac-4bf7-967a-dad14b8efe3f)
+![Captura de tela 2025-02-21 175411](https://github.com/user-attachments/assets/37cab9d5-79ac-4bf7-967a-dad14b8efe3f)
 
 
 ---
