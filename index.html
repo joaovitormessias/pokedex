@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./pokemon.js" defer></script>
+    <script src="./search.js" defer></script>
+  </head>
+  <body>
+    <main class="main">
+      <header class="header home">
+        <div class="container">
+          <div class="logo-wrapper">
+            <img src="./assets/pokeball.svg" alt="pokebola" />
+            <h1>Pokedex</h1>
+          </div>
+          <div class="busca-wrapper">
+            <div class="busca-wrap">
+              <img
+                src="./assets/search.svg"
+                alt="icone busca"
+                class="icone-busca"
+              />
+              <input
+                type="text"
+                class="entrada-busca body3-fonts"
+                id="entrada-busca"
+                placeholder="Busca"
+              />
+              <img
+                src="./assets/cross.svg"
+                alt="icone fechar"
+                class="icone-busca-fechar"
+                id="icone-busca-fechar"
+              />
+            </div>
+            <div class="ordenar-wrapper">
+              <div class="ordenar-wrap">
+                <img
+                  src="./assets/sorting.svg"
+                  alt="ordenar"
+                  class="icone-ordenar"
+                  id="icone-ordenar"
+                />
+              </div>
+              <div class="filtro-wrapper">
+                <p class="body2-fonts">Ordenar por:</p>
+                <div class="filtro-wrap">
+                  <div>
+                    <input
+                      type="radio"
+                      name="filtros"
+                      id="numero"
+                      value="numero"
+                      checked
+                    />
+                    <label for="numero" class="body3-fonts">Número</label>
+                  </div>
+                  <div>
+                    <input type="radio" name="filtros" id="nome" value="nome" />
+                    <label for="nome" class="body3-fonts">Nome</label>
+                  </div>
+                  <div>
+                    <label for="regiao" class="body3-fonts">Região</label>
+                    <select id="regiao">
+                      <option value="todas">Todas</option>
+                      <option value="kanto">Kanto</option>
+                      <option value="johto">Johto</option>
+                      <option value="hoenn">Hoenn</option>
+                      <option value="sinnoh">Sinnoh</option>
+                      <option value="unova">Unova</option>
+                      <option value="kalos">Kalos</option>
+                      <option value="alola">Alola</option>
+                      <option value="galar">Galar</option>
+                    </select>
+                  </div>
+                  <div>
+                    
+                    </select>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="lista-pokemon">
+        <div class="container">
+          <div class="lista-wrapper"></div>
+        </div>
+        <div id="mensagem-nao-encontrado">Pokemon não encontrado</div>
+      </section>
+    </main>
+  </body>
+</html>

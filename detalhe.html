@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do Pokémon</title>
+    <script src="./pokemon-detalhe.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
+    
+  </head>
+  <body>
+    <main class="detalhe-main main">
+      <header class="header">
+        <div class="header-wrapper">
+          <div class="header-wrap">
+            <a href="./index.html" class="btn-voltar-wrap">
+              <img
+                src="./assets/back-to-home.svg"
+                alt="Voltar para o início"
+                class="btn-voltar"
+                id="btn-voltar"
+              />
+            </a>
+            <div class="nome-wrap">
+              <h1 class="nome"></h1>
+            </div>
+          </div>
+          <div class="pokemon-id-wrap">
+            <p class="body2-fonts"></p>
+          </div>
+        </div>
+      </header>
+      <div class="img-destaque">
+        <a href="#" class="seta seta-esquerda" id="setaEsquerda">
+          <img src="./assets/chevron_left.svg" alt="Voltar" />
+        </a>
+        <div class="detalhe-img-wrapper">
+          <img src="" alt="" />
+        </div>
+        <a href="#" class="seta seta-direita" id="setaDireita">
+          <img src="./assets/chevron_right.svg" alt="Avançar" />
+        </a>
+      </div>
+      <div class="detalhe-cartao-detalhe-wrapper">
+        <div class="poder-wrapper">
+          <p class="body3-fonts tipo grama"></p>
+          <p class="body3-fonts tipo veneno"></p>
+        </div>
+        <p class="body2-fonts text-sobre">Sobre</p>
+        <div class="detalhe-pokemon-wrapper">
+          <div class="detalhe-pokemon-wrap">
+            <div class="detalhe-pokemon">
+              <img src="./assets/weight.svg" alt="peso" />
+              <p class="body3-fonts peso"></p>
+            </div>
+            <p class="fonte-legenda">Peso</p>
+          </div>
+          <div class="detalhe-pokemon-wrap">
+            <div class="detalhe-pokemon">
+              <img src="./assets/height.svg" alt="Altura" class="endireitar"/>
+              <p class="body3-fonts altura"></p>
+            </div>
+            <p class="fonte-legenda">Altura</p>
+          </div>
+          <div class="detalhe-pokemon-wrap">
+            <div class="detalhe-pokemon movimentacao"></div>
+            <p class="fonte-legenda">Movimentação</p>
+          </div>
+        </div>
+        <p class="body3-fonts descricao-pokemon"></p>
+        <p class="body2-fonts text-sobre">Status Base</p>
+        <div class="status-wrapper">
+          <div class="status-wrap" data-stat="hp">
+            <p class="body3-fonts status">HP</p>
+            <p class="body3-fonts"></p>
+            <progress value="" max="100" class="barra-progresso"></progress>
+          </div>
+          <div class="status-wrap" data-stat="ATK">
+            <p class="body3-fonts status">ATK</p>
+            <p class="body3-fonts"></p>
+            <progress value="" max="100" class="barra-progresso"></progress>
+          </div>
+          <div class="status-wrap" data-stat="DEF">
+            <p class="body3-fonts status">DEF</p>
+            <p class="body3-fonts"></p>
+            <progress value="" max="100" class="barra-progresso"></progress>
+          </div>
+          <div class="status-wrap" data-stat="SATK">
+            <p class="body3-fonts status">SATK</p>
+            <p class="body3-fonts"></p>
+            <progress value="" max="100" class="barra-progresso"></progress>
+          </div>
+        </div>
+      </div>
+      <img src="./assets/pokedex.svg" alt="Pokédex" class="detalhe-bg" />
+    </main>
+  </body>
+</html>
