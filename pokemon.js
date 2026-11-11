@@ -10,7 +10,16 @@ const mensagemNaoEncontrado = document.querySelector("#mensagem-nao-encontrado")
 
 // Variáveis globais
 let todosPokemons = [];
-let pokemonsPorRegiao = {};
+let pokemonsVisiveis = [];
+
+function filtrarPokemons() {
+  const term = buscaEntrada.value.trim().toLowerCase();
+  const filtered = pokemonsVisiveis.filter(p => numeroFiltro.checked ? p.url.split("/").filter(Boolean).pop() === term || !term : p.name.includes(term));
+  exibirPokemons(filtered);
+  mensagemNaoEncontrado.style.display = filtered.length ? "none" : "block";
+}
+numeroFiltro.addEventListener("change", filtrarPokemons);
+filtroNome.addEventListener("change", filtrarPokemons);
 
 // Carregar regiões
 async function carregarRegioes() {
@@ -18,7 +27,7 @@ async function carregarRegioes() {
     const response = await fetch("https://pokeapi.co/api/v2/region/");
     const data = await response.json();
     filtroRegiao.innerHTML = '<option value="todas">Todas</option>';
-    
+
     data.results.forEach(region => {
       const option = document.createElement("option");
       option.value = region.url;
@@ -36,16 +45,19 @@ async function carregarPokemonsPorRegiao(regionUrl) {
     const response = await fetch(regionUrl);
     const regionData = await response.json();
     const pokedexUrl = regionData.pokedexes[0].url;
-    
+
     const pokedexResponse = await fetch(pokedexUrl);
     const pokedexData = await pokedexResponse.json();
-    
+
     const pokemons = pokedexData.pokemon_entries.map(entry => ({
       name: entry.pokemon_species.name,
-      url: `https://pokeapi.co/api/v2/pokemon/${entry.entry_number}/`
+      // Regional entry numbers are not national IDs; species URLs contain the canonical ID.
+      url: entry.pokemon_species.url.replace("pokemon-species", "pokemon")
     }));
-    
-    exibirPokemons(pokemons);
+
+    if (filtroRegiao.value !== regionUrl) return; // Ignore a stale region response.
+    pokemonsVisiveis = pokemons;
+    filtrarPokemons();
   } catch (error) {
     console.error("Erro ao carregar Pokémon da região:", error);
   }
@@ -55,7 +67,8 @@ async function carregarPokemonsPorRegiao(regionUrl) {
 filtroRegiao.addEventListener("change", () => {
   const regionUrl = filtroRegiao.value;
   if (regionUrl === "todas") {
-    exibirPokemons(todosPokemons);
+    pokemonsVisiveis = todosPokemons;
+    filtrarPokemons();
   } else {
     carregarPokemonsPorRegiao(regionUrl);
   }
@@ -69,7 +82,8 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMONS}`)
       name: pokemon.name,
       url: `https://pokeapi.co/api/v2/pokemon/${index + 1}/`
     }));
-    exibirPokemons(todosPokemons);
+    pokemonsVisiveis = todosPokemons;
+    filtrarPokemons();
     carregarRegioes();
   });
 
@@ -85,7 +99,7 @@ function exibirPokemons(pokemons) {
         <p class="fonte-legenda">#${pokemonID}</p>
       </div>
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg" 
+        <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg"
         alt="${pokemon.name}" />
       </div>
       <div class="nome-wrap">

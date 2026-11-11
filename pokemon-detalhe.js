@@ -1,7 +1,6 @@
 let pokemonAtualId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const MAX_POKEMONS = 500;
   const urlParams = new URLSearchParams(window.location.search);
   const pokemonID = urlParams.get("id");
 
@@ -10,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const id = parseInt(pokemonID, 10);
-  if (id < 1 || id > MAX_POKEMONS) {
+  const id = Number(pokemonID);
+  if (id < 1 || !Number.isInteger(Number(pokemonID))) {
     window.location.href = "./index.html";
     return;
   }
@@ -41,20 +40,10 @@ async function carregarPokemon(id) {
           descricao || "Descrição não disponível.";
       }
       const[setaEsquerda,setaDireita] = ["#setaEsquerda","#setaDireita"].map((sel) => document.querySelector(sel)
-      ); 
-      setaEsquerda.removeEventListener("click", navegacaoPokemon); 
-      setaDireita.removeEventListener("click", navegacaoPokemon);
-      
-      if (id !== 1) {
-        setaEsquerda.addEventListener("click", () => {
-          navegacaoPokemon(id - 1);
-        });
-      }
-      if (id !== 151) {
-        setaDireita.addEventListener("click", () => {
-          navegacaoPokemon(id + 1);
-        });
-      }
+      );
+      // Assignment replaces the previous handler instead of accumulating closures.
+      setaEsquerda.onclick = id > 1 ? () => navegacaoPokemon(id - 1) : null;
+      setaDireita.onclick = () => navegacaoPokemon(id + 1);
 
       window.history.pushState({}, "", `./detalhe.html?id=${id}`);
     }
