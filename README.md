@@ -1,68 +1,55 @@
-# 📖 Pokédex
+# Pokédex
 
-Bem-vindo à **Pokédex**, um projeto desenvolvido utilizando **HTML, CSS e JavaScript** como parte de uma atividade acadêmica. Esta aplicação permite visualizar e buscar informações sobre diferentes Pokémon de maneira interativa e dinâmica.
+**Explore Pokémon with a lightweight browser application built without a frontend framework.**
 
----
+An academic project using HTML, CSS, and JavaScript to fetch PokéAPI data, display cards, filter by name/number and region, and inspect species details.
 
-## 🌟 Demonstração
+![Application screenshot](https://github.com/user-attachments/assets/37cab9d5-79ac-4bf7-967a-dad14b8efe3f)
 
-![Captura de tela 2025-02-21 175411](https://github.com/user-attachments/assets/37cab9d5-79ac-4bf7-967a-dad14b8efe3f)
+## What to explore
 
+| Capability | Implementation |
+| --- | --- |
+| Initial catalogue | First 500 Pokémon from the API |
+| Search | Name substring or exact national number within the selected list |
+| Regional catalogue | First Pokédex associated with the selected region; species URLs supply national IDs |
+| Details | Types, height, weight, abilities, base stats, and available description |
+| Navigation | Previous/next detail handlers are replaced, not accumulated |
 
----
+## Run locally
 
-## 🛠 Tecnologias Utilizadas
+```bash
+git clone https://github.com/joaovitormessias/pokedex.git
+cd pokedex
+python -m http.server 8000
+```
 
-- **HTML5** → Estrutura do site
-- **CSS3** → Estilização e layout responsivo
-- **JavaScript (ES6+)** → Manipulação da DOM e requisições de API
+Open http://localhost:8000. No npm install or API key is required. Internet access is needed for PokéAPI and sprite images. The interface remains in Portuguese.
 
----
+## Code walkthrough
 
-## 🚀 Como Executar o Projeto Localmente
+- [pokemon.js](pokemon.js): catalogue retrieval, regional mapping, filtering, and rendering.
+- [search.js](search.js): search controls and filter-menu interaction; listeners are registered once.
+- [pokemon-detalhe.js](pokemon-detalhe.js): parallel detail/species requests and detail presentation.
+- [style.css](style.css): responsive presentation.
 
-### 🔹 Requisitos
-- Um navegador atualizado (Google Chrome, Firefox, Edge, etc.)
-- Editor de código recomendado: VS Code
+The region-local `entry_number` is not a national Pokémon ID. Resolving the ID from the species URL prevents showing the wrong image/detail for regions beyond Kanto.
 
-### 🔹 Passos para Rodar
-1. Clone este repositório:
-   ```sh
-   git clone https://github.com/seu-usuario/pokedex.git
-   ```
-2. Acesse a pasta do projeto:
-   ```sh
-   cd pokedex
-   ```
-3. Abra o arquivo `index.html` no navegador.
+## Verify
 
----
+```bash
+node --check pokemon.js
+node --check search.js
+node --check pokemon-detalhe.js
+node --test tests/catalogue.test.cjs
+```
 
-## 🔍 Funcionalidades
+The catalogue regression test uses a mocked DOM and API responses. Browser layout, live API availability, and mobile behavior still require manual verification.
 
-✅ Exibir uma lista de Pokémon com imagens e informações básicas.
-✅ Buscar Pokémon pelo nome ou número na Pokédex.
-✅ Exibir detalhes adicionais ao clicar em um Pokémon.
-✅ Interface responsiva para diferentes dispositivos.
+Manual walkthrough: search by name; switch to number search; clear the field; select a non-Kanto region; open a card; navigate several times and verify one click changes one entry.
 
----
+## Limits
 
-## 🤝 Contribuição
+The initial list is capped at 500. Regional lists use the first Pokédex returned by the service. Not every sprite or Portuguese description is available. Detail requests beyond available IDs can fail; offline/error UX, pagination, accessibility, and browser history synchronization remain improvement areas.
 
-Se quiser contribuir para a melhoria deste projeto, siga estes passos:
-1. Faça um fork do repositório.
-2. Crie uma nova branch: `git checkout -b minha-melhoria`
-3. Faça suas alterações e commit: `git commit -m 'Adicionando nova funcionalidade'`
-4. Envie suas mudanças: `git push origin minha-melhoria`
-5. Abra um Pull Request.
-
----
-
-## 📜 Licença
-
-Este projeto está licenciado sob a **MIT License** - consulte o arquivo `LICENSE` para mais detalhes.
-
----
-
-🚀 *Desenvolvido como parte de uma atividade acadêmica.*
-
+[MIT license](LICENSE) · [Maintainer](https://github.com/joaovitormessias)

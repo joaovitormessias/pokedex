@@ -2,20 +2,6 @@
 const entradaBusca = document.querySelector("#entrada-busca");
 const iconeFechar = document.querySelector("#icone-busca-fechar");
 const ordenarWrapper = document.querySelector(".ordenar-wrapper");
-document.addEventListener("DOMContentLoaded", () => {
-  const entradaBusca = document.querySelector("#entrada-busca");
-  if (entradaBusca) {
-      entradaBusca.addEventListener("input", () => {
-          tratarMudancaEntrada(entradaBusca);
-      });
-  }
-
-  document.querySelector("#icone-busca-fechar")
-      .addEventListener("click", tratarCliqueFecharBusca);
-  document.querySelector(".ordenar-wrapper")
-      .addEventListener("click", tratarCliqueOrdenar);
-});
-
 entradaBusca.addEventListener("input", () => {
   tratarMudancaEntrada(entradaBusca);
 });
@@ -24,6 +10,7 @@ ordenarWrapper.addEventListener("click", tratarCliqueOrdenar);
 
 function tratarMudancaEntrada(entradaBusca) {
   const valorEntrada = entradaBusca.value;
+  filtrarPokemons();
 
   if (valorEntrada !== "") {
     document
@@ -38,6 +25,7 @@ function tratarMudancaEntrada(entradaBusca) {
 
 function tratarCliqueFecharBusca() {
   document.querySelector("#entrada-busca").value = "";
+  filtrarPokemons();
   document
     .querySelector("#icone-busca-fechar")
     .classList.remove("icone-busca-fechar-visivel");
